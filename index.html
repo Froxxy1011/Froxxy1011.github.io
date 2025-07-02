@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jamil's Matrix Sphere</title>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sphere</title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
     :root {
@@ -27,79 +27,13 @@
       height: 100vh;
       z-index: -2;
       background: #000;
-      display: block;
-    }
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      background: rgba(0,0,0,0.7);
-      color: #00ff41;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 18px 0 18px 0;
-      z-index: 10;
-      border-bottom: 1px solid rgba(0,255,65,0.1);
-      box-shadow: 0 2px 16px #00ff4122;
-    }
-    .site-title {
-      font-size: 2rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-    }
-    .intro-section {
-      margin-top: 110px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 60vh;
-    }
-    .intro-card {
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(10px);
-      border-radius: 18px;
-      box-shadow: 0 0 40px #00ff4133;
-      padding: 2.5rem 2.5rem 2rem 2.5rem;
-      max-width: 600px;
-      text-align: center;
-      border: 2px solid rgba(0,255,65,0.15);
-      margin-bottom: 30px;
-    }
-    .intro-card h1 {
-      font-size: 2.3rem;
-      margin-bottom: 1rem;
-      color: #00ff41;
-    }
-    .intro-card p {
-      color: #baffc9;
-      font-size: 1.15rem;
-      line-height: 1.7;
-    }
-    .skills {
-      margin-top: 1.5rem;
-      font-size: 1.1rem;
-      color: #00ff41;
-    }
-    .skills span {
-      background: #003b1a;
-      padding: 0.3em 0.7em;
-      border-radius: 6px;
-      margin: 0 0.3em;
-      display: inline-block;
-    }
-    .courses-section {
-      margin-top: 40px;
-      padding: 40px 0 0 0;
     }
     .courses {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 30px;
-      margin: 0 auto 50px auto;
+      margin: 100px auto;
       padding: 20px;
       max-width: 1200px;
     }
@@ -136,13 +70,13 @@
       opacity: 0;
       transition: opacity 0.4s ease-in-out;
     }
+    .course:hover::before {
+      opacity: 1;
+    }
     @keyframes moveGradient {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
-    }
-    .course:hover::before {
-      opacity: 1;
     }
     .course img {
       width: 70%;
@@ -179,12 +113,9 @@
       transform: scale(1.05) translateY(-2px);
       box-shadow: 0 6px 20px rgba(0,255,65,0.3);
     }
-    .view-details:active {
-      transform: scale(0.95);
-    }
     .contact {
       text-align: center;
-      margin: 50px auto 0 auto;
+      margin: 50px auto;
       padding: 20px;
       background: rgba(35, 35, 45, 0.6);
       backdrop-filter: blur(10px);
@@ -215,49 +146,35 @@
         flex-direction: column;
         align-items: center;
       }
-      .intro-card {
-        padding: 1.2rem 0.7rem;
-      }
     }
   </style>
 </head>
 <body>
   <canvas id="matrix"></canvas>
-  <header>
-    <h1 class="site-title">Jamil's Matrix Sphere</h1>
-  </header>
-  <section class="intro-section">
-    <div class="intro-card" data-aos="fade-down">
-      <h1>Hello, I'm Jamil</h1>
-      <p>
-        Welcome to my digital sphere! I'm a passionate male developer with a deep love for technology and creative problem-solving. My journey began with curiosity and a drive to understand how things work beneath the surface. Over the years, I've honed my skills in <span class="skills"><span>Python</span> <span>HTML</span> <span>CSS</span></span>, building everything from dynamic web applications to visually stunning user interfaces.<br><br>
-        I believe in the power of code to transform ideas into reality. Whether it's automating tasks with Python, crafting responsive layouts with HTML and CSS, or exploring new frameworks, I thrive on learning and pushing boundaries. My approach combines technical expertise with a keen eye for design, ensuring every project is both functional and beautiful.<br><br>
-        When I'm not coding, you'll find me exploring the latest tech trends, sharing knowledge, and collaborating with like-minded innovators. Dive into my world below to see some of the projects and courses I've curated. Let's connect and create something amazing together!
-      </p>
+
+  <section class="courses">
+    <div class="course" data-aos="zoom-in" data-tilt>
+      <img src="https://placehold.co/300x180/00ff41/000?text=Course+1" alt="Course 1">
+      <h2>Lorem Ipsum Course 1</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.</p>
+      <a href="#" class="view-details">View Details</a>
+    </div>
+
+    <div class="course" data-aos="zoom-in-up" data-tilt>
+      <img src="https://placehold.co/300x180/00ff41/000?text=Course+2" alt="Course 2">
+      <h2>Lorem Ipsum Course 2</h2>
+      <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+      <a href="#" class="view-details">View Details</a>
+    </div>
+
+    <div class="course" data-aos="zoom-in-down" data-tilt>
+      <img src="https://placehold.co/300x180/00ff41/000?text=Course+3" alt="Course 3">
+      <h2>Lorem Ipsum Course 3</h2>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+      <a href="#" class="view-details">View Details</a>
     </div>
   </section>
-  <section class="courses-section">
-    <div class="courses">
-      <div class="course" data-aos="zoom-in" data-tilt>
-        <img src="https://placehold.co/300x180/00ff41/000?text=Python+Mastery" alt="Python Mastery">
-        <h2>Python Mastery Bootcamp</h2>
-        <p>Comprehensive course to take you from beginner to advanced Python developer. Includes projects, quizzes, and real-world applications.</p>
-        <a href="#" class="view-details">View Details</a>
-      </div>
-      <div class="course" data-aos="zoom-in-up" data-aos-delay="100" data-tilt>
-        <img src="https://placehold.co/300x180/00ff41/000?text=HTML+&+CSS" alt="HTML & CSS">
-        <h2>HTML & CSS for Modern Web</h2>
-        <p>Learn to build beautiful, responsive websites from scratch using the latest HTML5 and CSS3 techniques.</p>
-        <a href="#" class="view-details">View Details</a>
-      </div>
-      <div class="course" data-aos="zoom-in-down" data-aos-delay="200" data-tilt>
-        <img src="https://placehold.co/300x180/00ff41/000?text=Web+Projects" alt="Web Projects">
-        <h2>Creative Web Projects</h2>
-        <p>Explore a collection of my favorite web projects, each designed to challenge and inspire both beginners and pros.</p>
-        <a href="#" class="view-details">View Details</a>
-      </div>
-    </div>
-  </section>
+
   <section class="contact" data-aos="zoom-in-up">
     <h2>Contact Me</h2>
     <a href="#" target="_blank">
@@ -267,18 +184,17 @@
       <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
     </a>
   </section>
+
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // Initialize AOS
     AOS.init({
       duration: 800,
       once: true,
       offset: 50,
     });
   </script>
-  <script type="text/javascript" src="https://unpkg.com/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
-  <script type="text/javascript">
-    // Initialize Vanilla Tilt on all elements with data-tilt
+  <script src="https://unpkg.com/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
+  <script>
     VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
       max: 15,
       speed: 400,
@@ -287,7 +203,6 @@
     });
   </script>
   <script>
-    // Matrix effect
     const canvas = document.getElementById('matrix');
     const ctx = canvas.getContext('2d');
     let width = window.innerWidth;
@@ -297,6 +212,7 @@
     const fontSize = 20;
     let columns = Math.floor(width / fontSize);
     let drops = Array(columns).fill(1);
+
     function drawMatrix() {
       ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
       ctx.fillRect(0, 0, width, height);
@@ -322,4 +238,4 @@
     });
   </script>
 </body>
-</html> 
+</html>
