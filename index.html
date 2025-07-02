@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sphere</title>
+  <title>Froxxy</title>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
@@ -11,9 +11,9 @@
       --glow-color: #00ff41;
     }
     html, body {
-      height: 100%;
       margin: 0;
       padding: 0;
+      height: 100%;
       font-family: 'Poppins', sans-serif;
       background: #000;
       color: #00ff41;
@@ -25,15 +25,52 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: -2;
+      z-index: -1;
       background: #000;
+    }
+    .intro-section {
+      margin-top: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      padding: 20px;
+    }
+    .intro-card {
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      box-shadow: 0 0 40px #00ff4133;
+      padding: 2rem;
+      max-width: 600px;
+      text-align: center;
+      border: 2px solid rgba(0,255,65,0.15);
+      margin-bottom: 30px;
+    }
+    .intro-card h1 {
+      font-size: 2.3rem;
+      margin-bottom: 1rem;
+      color: #00ff41;
+    }
+    .intro-card p {
+      color: #baffc9;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+    .skills span {
+      background: #003b1a;
+      padding: 0.3em 0.7em;
+      border-radius: 6px;
+      margin: 0 0.3em;
+      display: inline-block;
     }
     .courses {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 30px;
-      margin: 100px auto;
+      margin: 0 auto 50px auto;
       padding: 20px;
       max-width: 1200px;
     }
@@ -54,97 +91,23 @@
       justify-content: space-between;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .course::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 15px;
-      border: 2px solid transparent;
-      background: conic-gradient(from 180deg at 50% 50%, #00ff41 0deg, #baffc9 120deg, #003b1a 240deg, #00ff41 360deg);
-      background-size: 200% 200%;
-      animation: moveGradient 3s linear infinite;
-      z-index: -1;
-      opacity: 0;
-      transition: opacity 0.4s ease-in-out;
-    }
-    .course:hover::before {
-      opacity: 1;
-    }
-    @keyframes moveGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    .course img {
-      width: 70%;
-      height: auto;
-      border-radius: 10px;
-      margin-bottom: 15px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
     .course h2 {
-      font-size: 1.1rem;
-      margin-bottom: 15px;
-    }
-    .course p {
-      flex-grow: 1;
-      font-size: 0.95rem;
-      color: #eee;
-    }
-    .view-details {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 12px 18px;
-      background: linear-gradient(45deg, #00ff41, #003b1a);
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      border: none;
-      box-shadow: 0 4px 15px rgba(0,255,65,0.2);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .view-details:hover {
-      transform: scale(1.05) translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,255,65,0.3);
-    }
-    .contact {
-      text-align: center;
-      margin: 50px auto;
-      padding: 20px;
-      background: rgba(35, 35, 45, 0.6);
-      backdrop-filter: blur(10px);
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      width: 80%;
-      max-width: 500px;
-    }
-    .contact h2 {
-      font-size: 24px;
+      font-size: 1.2rem;
       margin-bottom: 15px;
       color: #00ff41;
     }
-    .contact a {
-      display: inline-block;
-      margin: 0 15px;
-    }
-    .contact img {
-      width: 40px;
-      height: auto;
-      transition: transform 0.3s ease;
-    }
-    .contact img:hover {
-      transform: scale(1.2) rotate(10deg);
+    .course p {
+      flex-grow: 1;
+      font-size: 1rem;
+      color: #ccc;
     }
     @media (max-width: 768px) {
       .courses {
         flex-direction: column;
         align-items: center;
+      }
+      .intro-card {
+        padding: 1.2rem 0.7rem;
       }
     }
   </style>
@@ -152,37 +115,28 @@
 <body>
   <canvas id="matrix"></canvas>
 
-  <section class="courses">
-    <div class="course" data-aos="zoom-in" data-tilt>
-      <img src="https://placehold.co/300x180/00ff41/000?text=Course+1" alt="Course 1">
-      <h2>Lorem Ipsum Course 1</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.</p>
-      <a href="#" class="view-details">View Details</a>
-    </div>
-
-    <div class="course" data-aos="zoom-in-up" data-tilt>
-      <img src="https://placehold.co/300x180/00ff41/000?text=Course+2" alt="Course 2">
-      <h2>Lorem Ipsum Course 2</h2>
-      <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-      <a href="#" class="view-details">View Details</a>
-    </div>
-
-    <div class="course" data-aos="zoom-in-down" data-tilt>
-      <img src="https://placehold.co/300x180/00ff41/000?text=Course+3" alt="Course 3">
-      <h2>Lorem Ipsum Course 3</h2>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-      <a href="#" class="view-details">View Details</a>
+  <section class="intro-section">
+    <div class="intro-card" data-aos="fade-down">
+      <h1>Hello, I'm Froxxy</h1>
+      <p>
+        Welcome to my matrix realm. I build with <span class="skills"><span>Python</span> <span>HTML</span> <span>CSS</span></span> and bring code to life. Dive in.
+      </p>
     </div>
   </section>
 
-  <section class="contact" data-aos="zoom-in-up">
-    <h2>Contact Me</h2>
-    <a href="#" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
-    </a>
-    <a href="#" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
-    </a>
+  <section class="courses">
+    <div class="course" data-aos="zoom-in">
+      <h2>Lorem Ipsum Project</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et.</p>
+    </div>
+    <div class="course" data-aos="zoom-in" data-aos-delay="100">
+      <h2>Dolor Sit Amet</h2>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</p>
+    </div>
+    <div class="course" data-aos="zoom-in" data-aos-delay="200">
+      <h2>Consectetur Adipiscing</h2>
+      <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis.</p>
+    </div>
   </section>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -193,31 +147,26 @@
       offset: 50,
     });
   </script>
-  <script src="https://unpkg.com/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
-  <script>
-    VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-      max: 15,
-      speed: 400,
-      glare: true,
-      "max-glare": 0.5
-    });
-  </script>
+
   <script>
     const canvas = document.getElementById('matrix');
     const ctx = canvas.getContext('2d');
+
     let width = window.innerWidth;
     let height = window.innerHeight;
     canvas.width = width;
     canvas.height = height;
-    const fontSize = 20;
-    let columns = Math.floor(width / fontSize);
-    let drops = Array(columns).fill(1);
+
+    const fontSize = 16;
+    const columns = Math.floor(width / fontSize);
+    const drops = Array(columns).fill(1);
 
     function drawMatrix() {
       ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
       ctx.fillRect(0, 0, width, height);
-      ctx.font = fontSize + 'px monospace';
+      ctx.font = `${fontSize}px monospace`;
       ctx.fillStyle = '#00ff41';
+
       for (let i = 0; i < drops.length; i++) {
         const text = Math.random() > 0.5 ? '0' : '1';
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
@@ -227,14 +176,14 @@
         drops[i]++;
       }
     }
+
     setInterval(drawMatrix, 50);
+
     window.addEventListener('resize', () => {
       width = window.innerWidth;
       height = window.innerHeight;
       canvas.width = width;
       canvas.height = height;
-      columns = Math.floor(width / fontSize);
-      drops = Array(columns).fill(1);
     });
   </script>
 </body>
