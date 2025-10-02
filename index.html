@@ -1,129 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Froxxy601 — Official Site</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment & Contact - Froxxy's Sphere</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-color: #f0f0f0;
+            --secondary-color: #121212;
+            --accent-color: #007bff;
+            --card-bg: #1e1e1e;
+            --border-color: #333;
+            --info-bg: rgba(0, 123, 255, 0.1);
+            --info-border: rgba(0, 123, 255, 0.5);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInContainer 0.8s forwards ease-out;
+        }
+
+        @keyframes fadeInContainer {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .note {
+            padding: 15px;
+            background: var(--info-bg);
+            border: 1px solid var(--info-border);
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .note p {
+            color: #ccc;
+            margin: 0;
+        }
+
+        .contact-method {
+            margin-bottom: 25px;
+            background: rgba(0,0,0,0.2);
+            padding: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-method:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact-method h2 {
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .contact-method p {
+            font-size: 1.1rem;
+            color: #ddd;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #00bfff;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body>
 
-  <!-- Hero Section -->
-  <header class="bg-gray-900 text-white py-20 text-center">
-    <h1 class="text-6xl font-extrabold mb-4">I am Froxxy601</h1>
-    <p class="text-2xl text-gray-400">Welcome to my official site — services, products, and more.</p>
-  </header>
+    <div class="container">
+        <h1>Contact & Payment Info</h1>
 
-  <!-- Services Section -->
-  <section id="services" class="py-20 bg-gray-800">
-    <div class="container mx-auto text-center">
-      <h2 class="text-5xl font-bold mb-12">My Services</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-
-        <!-- Service 1 -->
-        <div class="bg-gray-700 rounded-2xl shadow-lg p-6">
-          <img src="assets/images/paypal-crypto.jpg" alt="PayPal to Crypto" class="rounded-lg mb-4">
-          <h3 class="text-2xl font-semibold mb-2">PayPal ⇄ Crypto (NO KYC)</h3>
-          <p class="text-lg text-gray-300 mb-4">Price varies — DM for quote</p>
-          <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg">Buy Now</button>
+        <div class="note">
+            <p>I don’t use automated payment systems. To make a purchase, please contact me directly using the methods below.</p>
         </div>
 
-        <!-- Service 2 -->
-        <div class="bg-gray-700 rounded-2xl shadow-lg p-6">
-          <img src="assets/images/custom-tool.jpg" alt="Custom Tool" class="rounded-lg mb-4">
-          <h3 class="text-2xl font-semibold mb-2">Custom programmed tool for you</h3>
-          <p class="text-lg text-gray-300 mb-4">From $30</p>
-          <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg">Buy Now</button>
+        <div class="contact-method">
+            <h2>📲 Telegram</h2>
+            <p>You can reach me on Telegram: <span class="highlight">@Frozzy1011</span></p>
         </div>
 
-        <!-- Service 3 -->
-        <div class="bg-gray-700 rounded-2xl shadow-lg p-6">
-          <img src="assets/images/finish-project.jpg" alt="Finish Project" class="rounded-lg mb-4">
-          <h3 class="text-2xl font-semibold mb-2">Finish it off — Project finalization</h3>
-          <p class="text-lg text-gray-300 mb-4">From $15</p>
-          <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg">Buy Now</button>
+        <div class="contact-method">
+            <h2>💬 Discord</h2>
+            <p>Discord Username: <span class="highlight">tajikman271k</span></p>
         </div>
 
-      </div>
+        <a href="index.html" class="back-link">← Back to Home</a>
     </div>
-  </section>
-
-  <!-- Products Section -->
-  <section id="products" class="py-20 bg-gray-900">
-    <div class="container mx-auto text-center">
-      <h2 class="text-5xl font-bold mb-12">My Products</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-
-        <!-- Product 1 -->
-        <div class="bg-gray-800 rounded-2xl shadow-lg p-6">
-          <img src="assets/images/netflix.jpg" alt="Netflix" class="rounded-lg mb-4">
-          <h3 class="text-2xl font-semibold mb-2">Netflix Account (1 Month)</h3>
-        </div>
-
-        <!-- Product 2 -->
-        <div class="bg-gray-800 rounded-2xl shadow-lg p-6">
-          <img src="assets/images/youtube-premium.jpg" alt="YouTube Premium" class="rounded-lg mb-4">
-          <h3 class="text-2xl font-semibold mb-2">YouTube Premium Invite (1, 2, 3 Months)</h3>
-        </div>
-
-        <!-- Product 3 -->
-        <div class="bg-gray-800 rounded-2xl shadow-lg p-6">
-          <img src="assets/images/spotify.jpg" alt="Spotify" class="rounded-lg mb-4">
-          <h3 class="text-2xl font-semibold mb-2">Spotify Code (1, 2 Months)</h3>
-        </div>
-
-        <!-- Product 4 -->
-        <div class="bg-gray-800 rounded-2xl shadow-lg p-6">
-          <img src="assets/images/steam.jpg" alt="Steam" class="rounded-lg mb-4">
-          <h3 class="text-2xl font-semibold mb-2">Steam 1 Game Account</h3>
-        </div>
-
-        <!-- Product 5 -->
-        <div class="bg-gray-800 rounded-2xl shadow-lg p-6">
-          <img src="assets/images/amazon-prime.jpg" alt="Amazon Prime" class="rounded-lg mb-4">
-          <h3 class="text-2xl font-semibold mb-2">Amazon Prime Video (1M, 6M)</h3>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="py-20 bg-gray-800 text-white">
-    <div class="container mx-auto text-center">
-      <h2 class="text-5xl font-bold mb-12">Contact & Links</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center">
-
-        <div class="p-6 bg-gray-700 rounded-xl shadow-lg">
-          <h3 class="font-semibold">Email</h3>
-          <p><a href="mailto:youremail@example.com" class="text-blue-400 hover:underline">youremail@example.com</a></p>
-        </div>
-
-        <div class="p-6 bg-gray-700 rounded-xl shadow-lg">
-          <h3 class="font-semibold">Telegram</h3>
-          <p><a href="https://t.me/Frozzy1011" target="_blank" class="text-blue-400 hover:underline">@Frozzy1011</a></p>
-        </div>
-
-        <div class="p-6 bg-gray-700 rounded-xl shadow-lg">
-          <h3 class="font-semibold">Discord</h3>
-          <p class="text-blue-400">tajikman271k</p>
-        </div>
-
-      </div>
-
-      <div class="mt-10 p-4 bg-gray-700 rounded-lg shadow-lg">
-        <p class="text-lg text-gray-300">
-          Anything you do here, I am not liable or responsible for.  
-          All actions are at your own risk.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-500 py-6 text-center">
-    <p>© 2025 Froxxy601 — Built for GitHub Pages</p>
-  </footer>
 
 </body>
 </html>
