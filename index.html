@@ -3,66 +3,311 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Trend's Sphere — Demo</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Trend's Sphere — Store</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* --- Simple reset & fonts --- */
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@300;400;600&display=swap');
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:'Poppins',system-ui,Arial,sans-serif;
+      background:#05060a url('assets/bg-pattern.jpg') center/cover fixed no-repeat;
+      color:#eaf6ff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* header */
+    .site-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 28px;
+      gap:12px;
+      position:sticky;
+      top:0;
+      background:linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.15));
+      z-index:50;
+      border-bottom:1px solid rgba(255,255,255,0.03);
+    }
+    .brand{font-family:'Orbitron',sans-serif;font-weight:700;font-size:28px;text-shadow:0 0 10px rgba(40,180,255,0.15)}
+    .nav-links a{color:inherit;text-decoration:none;margin-left:18px;font-weight:600;opacity:0.95}
+    .nav-links a:hover{color:#49a8ff;text-shadow:0 0 6px rgba(73,168,255,0.18)}
+
+    /* hero/container */
+    .hero{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:48px 20px;
+    }
+    .hero-intro{
+      text-align:center;
+      max-width:980px;
+      margin-bottom:30px;
+      background:rgba(0,0,0,0.45);
+      padding:22px;
+      border-radius:12px;
+      backdrop-filter: blur(6px);
+      box-shadow:0 10px 30px rgba(0,0,0,0.6);
+    }
+    .hero-intro h1{font-family:'Orbitron';font-size:28px;margin-bottom:6px; color: #dff7ff; text-shadow:0 6px 20px rgba(0,120,200,0.08)}
+    .hero-intro p{color:rgba(230,245,255,0.9);line-height:1.45}
+
+    /* sections */
+    .section {
+      width:100%;
+      padding:36px 20px;
+      display:block;
+    }
+    .container{max-width:1150px;margin:0 auto}
+
+    /* --- Big cards grid (Services & Products) --- */
+    .cards-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap:22px;
+      align-items:start;
+      margin-top:20px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.06);
+      padding:22px;
+      border-radius:16px;
+      box-shadow: 0 12px 35px rgba(3,8,15,0.6);
+      min-height:420px; /* bigger cards */
+      display:flex;
+      flex-direction:column;
+    }
+    .card img{width:100%; height:180px; object-fit:cover; border-radius:10px; margin-bottom:14px}
+    .card h3{font-size:20px;margin-bottom:8px;color:#e9fbff}
+    .card .price{font-size:20px;color:#7be1ff;font-weight:700;margin-bottom:10px; text-shadow:0 4px 18px rgba(30,160,240,0.08)}
+    .card p{flex-grow:1;color:rgba(230,245,255,0.9); margin-bottom:14px; font-size:14px}
+    .card .card-actions{display:flex; gap:10px}
+    .btn{
+      display:inline-block;padding:12px 14px;border-radius:10px;text-decoration:none;font-weight:700;text-align:center;
+      cursor:pointer;
+    }
+    .btn-buy{background:#1e90ff;color:#fff;box-shadow:0 6px 18px rgba(30,144,255,0.18);}
+    .btn-details{background:rgba(255,255,255,0.06); color:#eaf6ff; border:1px solid rgba(255,255,255,0.03)}
+    .btn:hover{transform:translateY(-2px);transition:transform .15s ease}
+
+    /* tabs */
+    .tabs{display:flex;gap:12px; margin-top:18px; align-items:center; flex-wrap:wrap}
+    .tab-btn{padding:10px 14px;border-radius:8px;background:rgba(255,255,255,0.02); cursor:pointer;border:1px solid rgba(255,255,255,0.03); font-weight:700}
+    .tab-btn.active{background:linear-gradient(90deg,#0077ff,#00c6ff); color:#011623; box-shadow:0 8px 20px rgba(0,160,255,0.12)}
+
+    /* contact / footer */
+    .contact-row{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px}
+    .contact-card{background:rgba(255,255,255,0.03); padding:14px;border-radius:8px;min-width:200px}
+    footer{padding:28px 20px;text-align:center;color:rgba(220,235,245,0.6);border-top:1px solid rgba(255,255,255,0.02);margin-top:30px}
+
+    /* responsive */
+    @media (max-width:880px){
+      .hero-intro h1{font-size:22px}
+      .card{min-height:380px}
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="logo">Trend's Sphere</div>
-    <nav>
-      <a href="#products">Products</a>
-      <a href="#details">Details</a>
-      <a href="#contact">Contact</a>
+
+  <header class="site-top">
+    <div class="brand">Trend's Sphere</div>
+    <nav class="nav-links">
+      <a href="#services" onclick="showTab('services')">Services</a>
+      <a href="#products" onclick="showTab('products')">My Products</a>
+      <a href="contact.html" target="_blank" rel="noopener">Contact</a>
     </nav>
   </header>
 
   <main>
     <section class="hero">
-      <div class="hero-overlay"></div>
-      <div class="hero-inner">
-        <h1>28 Days to Master The Unspoken Internet</h1>
-        <p>Fast-track your cyber skills — practical, ethical, career-ready results.</p>
-        <div class="hero-actions">
-          <a class="btn" href="#details">Learn More</a>
-          <button id="buyBtn" class="btn outline">Buy Now</button>
+      <div class="hero-intro">
+        <h1>Clean store layout — ready for GitHub Pages</h1>
+        <p>All scammer/illegal product references removed. Use the sections below to display your services and digital products. Clicking <strong>Buy Now</strong> opens a simple payments/contact page in a new tab so buyers can reach you.</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="container">
+        <div class="tabs">
+          <button class="tab-btn active" id="tab-services" onclick="showTab('services')">Services</button>
+          <button class="tab-btn" id="tab-products" onclick="showTab('products')">My Products</button>
         </div>
       </div>
     </section>
 
-    <section id="products" class="cards">
-      <article class="card">
-        <img src="assets/course-thumb.jpg" alt="course" />
-        <h3>28 Day Course</h3>
-        <p>Practical, hands-on modules, PIN for authentication included.</p>
-        <a class="btn small" href="#details">View Details</a>
-        <button class="btn small outline" onclick="openContactTab()">Buy</button>
-      </article>
+    <!-- SERVICES -->
+    <section id="services" class="section">
+      <div class="container">
+        <h2 style="font-family:Orbitron, sans-serif; text-align:left; margin-bottom:12px">Services</h2>
+        <p style="color:rgba(230,245,255,0.85); margin-bottom:18px">Professional & lawful services. Be sure to comply with platform rules and local laws when offering financial or account-related services.</p>
 
-      <!-- duplicate more cards as needed -->
+        <div class="cards-grid">
+          <!-- Service 1 -->
+          <div class="card">
+            <img src="assets/service-paypal-crypto.jpg" alt="PayPal to Crypto">
+            <h3>PayPal ⇄ Crypto (OTC, KYC-compliant)</h3>
+            <div class="price">Price varies — DM for quote</div>
+            <p>Over-the-counter fiat/crypto exchange assistance for compliant users. All transactions follow KYC/AML rules. Contact us for rates, limits and verification requirements.</p>
+            <div class="card-actions">
+              <a class="btn btn-buy" href="payments.html" target="_blank" rel="noopener">Buy Now</a>
+              <a class="btn btn-details" href="service-paypal-crypto.html">View Details</a>
+            </div>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="card">
+            <img src="assets/service-tool.jpg" alt="Custom Tool">
+            <h3>Custom programmed tool for you</h3>
+            <div class="price">From $30</div>
+            <p>We build custom scripts & tools tailored to your workflow — automation, data parsing, simple web tools, helpers. Provide requirements and we’ll deliver a quote & timeline.</p>
+            <div class="card-actions">
+              <a class="btn btn-buy" href="payments.html" target="_blank" rel="noopener">Buy Now</a>
+              <a class="btn btn-details" href="service-custom-tool.html">View Details</a>
+            </div>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="card">
+            <img src="assets/service-finish.jpg" alt="Finish It Off">
+            <h3>Finish it off — Project finalization</h3>
+            <div class="price">From $15</div>
+            <p>Got a half-finished project? We'll help finish, tidy, test and document it so it's production-ready. Works well for front-end fixes, deployment help, or packaging deliverables.</p>
+            <div class="card-actions">
+              <a class="btn btn-buy" href="payments.html" target="_blank" rel="noopener">Buy Now</a>
+              <a class="btn btn-details" href="service-finish.html">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="details" class="details">
-      <h2>Choose any plan from details section</h2>
-      <p>Plan A — Basic; Plan B — Pro; Plan C — Full access + PIN</p>
-      <ul>
-        <li>Track 1 & Track 2</li>
-        <li>High quality enrolls</li>
-        <li>PIN included for full authentication</li>
-      </ul>
-      <a href="#products" class="btn">Back to products</a>
+    <!-- PRODUCTS -->
+    <section id="products" class="section" style="display:none">
+      <div class="container">
+        <h2 style="font-family:Orbitron, sans-serif; text-align:left; margin-bottom:12px">My Products</h2>
+        <p style="color:rgba(230,245,255,0.85); margin-bottom:18px">Digital goods and subscriptions. Ensure you have the right to resell any accounts/keys and follow the platforms' terms of service.</p>
+
+        <div class="cards-grid">
+          <div class="card">
+            <img src="assets/product-netflix.jpg" alt="Netflix 1 Month">
+            <h3>Netflix Account — 1 Month</h3>
+            <div class="price">$3</div>
+            <p>1 month access. Delivery via DM with instructions. Check availability before buying.</p>
+            <div class="card-actions">
+              <a class="btn btn-buy" href="payments.html" target="_blank" rel="noopener">Buy Now</a>
+              <a class="btn btn-details" href="product-netflix-1m.html">View Details</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="assets/product-youtube.jpg" alt="YouTube Premium Invite">
+            <h3>YouTube Premium Invite</h3>
+            <div class="price">1/2/3 Months</div>
+            <p>Invite-based access for 1, 2 or 3 months. Choose duration at checkout via DM.</p>
+            <div class="card-actions">
+              <a class="btn btn-buy" href="payments.html" target="_blank" rel="noopener">Buy Now</a>
+              <a class="btn btn-details" href="product-youtube.html">View Details</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="assets/product-spotify.jpg" alt="Spotify Code">
+            <h3>Spotify Code</h3>
+            <div class="price">1 / 2 Months</div>
+            <p>Redeemable code for Spotify access. Instant delivery after payment.</p>
+            <div class="card-actions">
+              <a class="btn btn-buy" href="payments.html" target="_blank" rel="noopener">Buy Now</a>
+              <a class="btn btn-details" href="product-spotify.html">View Details</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="assets/product-steam.jpg" alt="Steam Game Account">
+            <h3>Steam — 1 Game Account</h3>
+            <div class="price">From $8</div>
+            <p>Account with one game from our available list. Game title depends on stock—ask before purchase.</p>
+            <div class="card-actions">
+              <a class="btn btn-buy" href="payments.html" target="_blank" rel="noopener">Buy Now</a>
+              <a class="btn btn-details" href="product-steam.html">View Details</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="assets/product-amazon.jpg" alt="Amazon Prime Video">
+            <h3>Amazon Prime Video</h3>
+            <div class="price">1M / 6M</div>
+            <p>Prime Video access for 1 or 6 months. Delivery & instructions sent after payment confirmation.</p>
+            <div class="card-actions">
+              <a class="btn btn-buy" href="payments.html" target="_blank" rel="noopener">Buy Now</a>
+              <a class="btn btn-details" href="product-amazon.html">View Details</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </section>
+
+    <!-- Contact + Footer -->
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 style="font-family:Orbitron, sans-serif; text-align:left; margin-bottom:12px">Contact & Links</h2>
+        <div class="contact-row">
+          <div class="contact-card">
+            <strong>Email</strong>
+            <div style="margin-top:6px"><a href="mailto:youremail@example.com" style="color:#9fe9ff">youremail@example.com</a></div>
+          </div>
+          <div class="contact-card">
+            <strong>Telegram</strong>
+            <div style="margin-top:6px"><a href="https://t.me/yourusername" target="_blank" rel="noopener" style="color:#9fe9ff">@yourusername</a></div>
+          </div>
+          <div class="contact-card">
+            <strong>WhatsApp</strong>
+            <div style="margin-top:6px">+1 555 555 5555</div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px; background:rgba(255,255,255,0.03); padding:14px; border-radius:8px">
+          <strong>Important:</strong> Make sure any account or subscription you buy is legal to resell in your location and does not violate the service's terms. I do not support fraud, stolen accounts or identity evasion. All sales handled via the contact page.
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Trend's Sphere — Built for GitHub Pages
+    </footer>
   </main>
 
-  <footer id="contact" class="site-footer">
-    <div class="contact-card">
-      <h4>Contact</h4>
-      <p>Email: name@example.com</p>
-      <p>Telegram: @yourhandle</p>
-      <p>Phone: +1 555 555 5555</p>
-    </div>
-    <small>© <span id="year"></span> Your Name / Brand</small>
-  </footer>
+  <script>
+    // Small UI logic for tabs and year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-  <script src="script.js"></script>
+    function showTab(which){
+      const services = document.getElementById('services');
+      const products = document.getElementById('products');
+      const btnServices = document.getElementById('tab-services');
+      const btnProducts = document.getElementById('tab-products');
+
+      if(which === 'services'){
+        services.style.display = 'block';
+        products.style.display = 'none';
+        btnServices.classList.add('active');
+        btnProducts.classList.remove('active');
+        location.hash = '#services';
+      } else {
+        services.style.display = 'none';
+        products.style.display = 'block';
+        btnProducts.classList.add('active');
+        btnServices.classList.remove('active');
+        location.hash = '#products';
+      }
+    }
+
+    // Default: show services
+    showTab('services');
+  </script>
 </body>
 </html>
