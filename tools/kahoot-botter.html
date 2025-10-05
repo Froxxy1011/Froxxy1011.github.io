@@ -8,54 +8,20 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@300;400;600&display=swap');
     *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:'Poppins',sans-serif;
-      background:#05060a url('../assets/bg-pattern.jpg') center/cover fixed no-repeat;
-      color:#eaf6ff;
-      overflow-x:hidden;
-    }
-    header{
-      position:sticky;top:0;z-index:50;
-      display:flex;justify-content:space-between;align-items:center;
-      padding:18px 28px;background:rgba(0,0,0,0.6);
-      border-bottom:1px solid rgba(255,255,255,0.05);
-    }
+    body{font-family:'Poppins',sans-serif;background:#05060a;color:#eaf6ff;overflow-x:hidden}
+    header{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:18px 28px;background:rgba(0,0,0,0.6);border-bottom:1px solid rgba(255,255,255,0.05)}
     .brand{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:700;color:#7be1ff;text-decoration:none}
     .back-link{color:#eaf6ff;text-decoration:none;font-weight:600}
     .back-link:hover{color:#49a8ff}
-
-    main{
-      display:flex;flex-direction:column;align-items:center;justify-content:center;
-      min-height:90vh;padding:40px 20px;text-align:center;
-    }
+    main{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:90vh;padding:40px 20px;text-align:center}
     h1{font-family:'Orbitron';font-size:46px;color:#7be1ff;margin-bottom:10px;animation:fadeDown 1.2s ease}
     p.desc{max-width:650px;margin-bottom:30px;color:#c9e7ff;font-size:17px;line-height:1.8;animation:fadeUp 1.4s ease}
-    
-    form{
-      background:rgba(255,255,255,0.03);
-      border:1px solid rgba(255,255,255,0.05);
-      border-radius:16px;
-      padding:30px;
-      max-width:400px;
-      width:100%;
-      box-shadow:0 8px 28px rgba(0,0,0,0.55);
-      animation:fadeUp 1.5s ease;
-    }
+    form{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:30px;max-width:400px;width:100%;box-shadow:0 8px 28px rgba(0,0,0,0.55);animation:fadeUp 1.5s ease}
     label{display:block;text-align:left;margin-bottom:6px;font-weight:600}
-    input{
-      width:100%;padding:10px;margin-bottom:18px;
-      background:rgba(255,255,255,0.06);border:none;border-radius:8px;
-      color:#eaf6ff;font-size:15px;
-    }
-    button{
-      width:100%;padding:12px;font-weight:700;border:none;border-radius:8px;
-      background:#1e90ff;color:#fff;font-size:16px;
-      cursor:pointer;transition:0.3s;
-    }
+    input{width:100%;padding:10px;margin-bottom:18px;background:rgba(255,255,255,0.06);border:none;border-radius:8px;color:#eaf6ff;font-size:15px}
+    button{width:100%;padding:12px;font-weight:700;border:none;border-radius:8px;background:#1e90ff;color:#fff;font-size:16px;cursor:pointer;transition:0.3s}
     button:hover{background:#0078e8}
-
     .log{margin-top:20px;color:#7be1ff;font-size:14px;white-space:pre-line}
-
     @keyframes fadeDown{from{opacity:0;transform:translateY(-40px)}to{opacity:1;transform:translateY(0)}}
     @keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
   </style>
@@ -90,6 +56,8 @@
     const form = document.getElementById('botForm');
     const log = document.getElementById('log');
 
+    const BACKEND_URL = "https://kahoot-botter-backend.onrender.com"; 
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       log.textContent = "⏳ Sending bots...";
@@ -99,16 +67,17 @@
       const name = document.getElementById('name').value;
 
       try {
-        const res = await fetch("https://b064f22a-35cf-4bcc-849d-7a369f5a0568-00-7u3jv3uqrpj8.picard.replit.dev/start", {
+        const res = await fetch(`${BACKEND_URL}/start`, {
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({ pin, count, name })
         });
 
         if (res.ok) {
-          log.textContent = "✅ Bots are joining your Kahoot game!";
+          const data = await res.json();
+          log.textContent = `✅ ${data.message}`;
         } else {
-          log.textContent = "❌ Error: " + res.statusText;
+          log.textContent = `❌ Error: ${res.status} ${res.statusText}`;
         }
       } catch (err) {
         log.textContent = "⚠️ Could not connect to backend.";
