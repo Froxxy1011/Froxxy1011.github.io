@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TikTok User Lookup | Froxxy601 Tools</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@300;400;600&display=swap');
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:#05060a;
+      color:#eaf6ff;
+      overflow-x:hidden;
+    }
+    header{
+      position:sticky;top:0;z-index:50;
+      display:flex;justify-content:space-between;align-items:center;
+      padding:18px 28px;background:rgba(0,0,0,0.6);
+      border-bottom:1px solid rgba(255,255,255,0.05);
+    }
+    .brand{font-family:'Orbitron',sans-serif;font-size:26px;font-weight:700;color:#7be1ff}
+    nav a{margin-left:18px;color:#eaf6ff;text-decoration:none;font-weight:600}
+    nav a:hover{color:#49a8ff}
+    section{padding:80px 20px}
+    .container{max-width:900px;margin:0 auto;text-align:center}
+    h1{font-family:'Orbitron';font-size:40px;margin-bottom:20px;color:#7be1ff}
+    p.desc{color:#c9e7ff;font-size:16px;margin-bottom:32px}
+    input{
+      padding:12px 18px;width:70%;max-width:400px;
+      border:none;border-radius:8px;margin-right:8px;
+      font-size:16px;background:rgba(255,255,255,0.1);color:#fff;
+    }
+    button{
+      padding:12px 18px;border:none;border-radius:8px;
+      background:#1e90ff;color:#fff;font-weight:700;
+      cursor:pointer;transition:0.3s;
+    }
+    button:hover{background:#49a8ff}
+    .output{
+      margin-top:40px;text-align:left;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.05);
+      border-radius:14px;padding:20px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.4);
+    }
+    pre{
+      white-space:pre-wrap;word-wrap:break-word;
+      background:rgba(0,0,0,0.4);
+      padding:14px;border-radius:10px;color:#a8eaff;
+      font-size:14px;overflow-x:auto;
+    }
+    .loading{color:#7be1ff;margin-top:20px;animation:fadeIn 1s ease infinite alternate}
+    @keyframes fadeIn{from{opacity:0.3}to{opacity:1}}
+    footer{
+      padding:30px 20px;text-align:center;
+      color:#9bb9cc;
+      border-top:1px solid rgba(255,255,255,0.05);
+      margin-top:40px
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">Froxxy601</div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../#tools">Tools</a>
+      <a href="../#products">Products</a>
+      <a href="../#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section>
+    <div class="container">
+      <h1>TikTok User Lookup</h1>
+      <p class="desc">Enter a TikTok username to fetch user and video data through Froxxy’s backend API.</p>
+      <input type="text" id="username" placeholder="e.g. frozzy1011">
+      <button onclick="lookupUser()">Search</button>
+      <div id="status" class="loading" style="display:none;">Fetching data...</div>
+      <div id="output" class="output" style="display:none;"></div>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> Froxxy601 — TikTok Data Tool
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    async function lookupUser() {
+      const username = document.getElementById('username').value.trim();
+      const output = document.getElementById('output');
+      const status = document.getElementById('status');
+      output.style.display = "none";
+      status.style.display = "block";
+      status.textContent = "Fetching data...";
+
+      if (!username) {
+        status.textContent = "❌ Please enter a username.";
+        return;
+      }
+
+      try {
+        const res = await fetch(`https://tiktok-user-backend.onrender.com/user?username=${username}`);
+        const data = await res.json();
+        status.style.display = "none";
+        output.style.display = "block";
+        output.innerHTML = `
+          <h3>👤 User Info</h3>
+          <pre>${JSON.stringify(data.user || data, null, 2)}</pre>
+          ${data.videos ? `<h3>🎥 Recent Videos</h3><pre>${JSON.stringify(data.videos, null, 2)}</pre>` : ''}
+        `;
+      } catch (err) {
+        status.textContent = "⚠️ Error fetching data. Check console.";
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>
